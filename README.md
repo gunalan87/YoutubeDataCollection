@@ -17,3 +17,4 @@ Kindly go through the below link to get started in Youtube Data API implementati
 https://developers.google.com/youtube/v3/getting-started
 
 Used .env file to store important static information in order to separate code from configuration settings.
+Use mysqltables.txt for Table schemas to create in MySQL Database.
