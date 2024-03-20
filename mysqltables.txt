@@ -1,0 +1,50 @@
+CREATE TABLE `channels` (
+   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+   `channel_id` varchar(255) NOT NULL,
+   `channel_name` varchar(255) NOT NULL,
+   `subscriber_count` int(10) unsigned NOT NULL,
+   `publish_time` datetime NOT NULL,
+   `channel_view` int(10) unsigned NOT NULL,
+   `channel_description` text DEFAULT NULL,
+   `channel_status` varchar(255) NOT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ 
+ CREATE TABLE `comments` (
+   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+   `comment_id` varchar(255) NOT NULL,
+   `video_id` int(10) unsigned NOT NULL,
+   `comment_text` varchar(255) NOT NULL,
+   `comment_author` varchar(255) NOT NULL,
+   `comment_published_date` datetime NOT NULL,
+   PRIMARY KEY (`id`),
+   KEY `video_id` (`video_id`),
+   CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `videos` (`id`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ 
+CREATE TABLE `playlist` (
+   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+   `cid` int(10) unsigned NOT NULL,
+   `playlist_id` varchar(255) NOT NULL,
+   PRIMARY KEY (`id`),
+   KEY `cid` (`cid`),
+   CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `channels` (`id`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ 
+CREATE TABLE `videos` (
+   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+   `playlist_id` int(10) unsigned NOT NULL,
+   `video_name` varchar(255) NOT NULL,
+   `video_id` varchar(255) NOT NULL,
+   `video_description` varchar(255) DEFAULT NULL,
+   `published_date` datetime NOT NULL,
+   `view_count` int(10) unsigned NOT NULL,
+   `like_count` int(10) unsigned NOT NULL,
+   `favourite_count` int(10) unsigned NOT NULL,
+   `duration` int(10) unsigned NOT NULL,
+   `thumbnail` varchar(255) NOT NULL,
+   `caption_status` varchar(255) NOT NULL,
+   PRIMARY KEY (`id`),
+   KEY `playlist_id` (`playlist_id`),
+   CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`playlist_id`) REFERENCES `playlist` (`id`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
