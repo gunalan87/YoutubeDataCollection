@@ -17,7 +17,7 @@ class mysqldbconnect:
             # Reference URL : https://dev.mysql.com/doc/connector-python/en/connector-python-example-connecting.html
             self._dbconn  = mysql.connector.connect(user = self.mysql_user,password = self.mysql_password,host = self.mysql_host,database = self.mysql_database)
             #Creating a cursor object using the cursor() method
-            self._cursor = self._dbconn.cursor()
+            self._cursor = self._dbconn.cursor(dictionary=True)
         except mysql.connector.Error as err:
             print(err)
     def add_channel_details(self,data):
